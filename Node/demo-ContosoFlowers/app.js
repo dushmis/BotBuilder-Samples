@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Register your web app routes here
 app.get('/', (req, res, next) =>
-  res.render('index', { title: 'Contoso Flowers' }));
+    res.render('index', { title: 'YOU Broadband' }));
 
 // Register Checkout page
 var checkout = require('./checkout');
@@ -25,36 +25,36 @@ var bot = require('./bot');
 app.post('/api/messages', bot.listen());
 
 // Catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // Error handlers
 
 // Development error handler, will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // Production error handler, no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 // Start listening
 var port = process.env.port || process.env.PORT || 3978;
-app.listen(port, function () {
-  console.log('Web Server listening on port %s', port);
+app.listen(port, function() {
+    console.log('Web Server listening on port %s', port);
 });

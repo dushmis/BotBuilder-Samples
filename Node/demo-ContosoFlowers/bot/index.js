@@ -24,8 +24,8 @@ var bot = new builder.UniversalBot(connector, (session) => {
         .subtitle('welcome_subtitle')
         .images([
             new builder.CardImage(session)
-                .url('https://placeholdit.imgix.net/~text?txtsize=56&txt=Contoso%20Flowers&w=640&h=330')
-                .alt('contoso_flowers')
+            .url('http://youbroadband.in/img/logox100.png')
+            .alt('you_broadband')
         ])
         .buttons([
             builder.CardAction.imBack(session, session.gettext(MainOptions.Shop), MainOptions.Shop),
@@ -92,6 +92,7 @@ bot.on('conversationUpdate', (message) => {
 
 // Cache of localized regex to match selection from main options
 const LocalizedRegexCache = {};
+
 function localizedRegex(session, localeKeys) {
     var locale = session.preferredLocale();
     var cacheKey = locale + ":" + localeKeys.join('|');
@@ -107,8 +108,9 @@ function localizedRegex(session, localeKeys) {
 
 // Connector listener wrapper to capture site url
 var connectorListener = connector.listen();
+
 function listen() {
-    return function (req, res) {
+    return function(req, res) {
         // Capture the url for the hosted application
         // We'll later need this url to create the checkout link 
         var url = req.protocol + '://' + req.get('host');
