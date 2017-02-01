@@ -4,13 +4,13 @@ var Promise = require('bluebird');
 const allCategories = _.times(5)
     .map((i) => ({
         name: 'Plan Type ' + (i + 1),
-        imageUrl: 'http://youbroadband.in/img/logox100.png' + (i + 1) + '&w=640&h=330'
+        imageUrl: 'http://youbroadband.in/img/logox100.png?i=' + (i + 1) + '&w=640&h=330'
     }));
 
 const allProducts = _.times(17)
     .map((i) => ({
         name: 'Plan ' + (i + 1),
-        imageUrl: 'http://youbroadband.in/img/logox100.png' + (i + 1) + '&w=640&h=330',
+        imageUrl: 'http://youbroadband.in/img/logox100.png?i=' + (i + 1) + '&w=640&h=330',
         price: Math.floor(Math.random() * 100) + 10 + .99
     }));
 
