@@ -19,22 +19,22 @@ const lib = new builder.Library('product-selection');
 lib.dialog('/',
     new SimpleWaterfallDialog([
         // First message
-        function (session, args, next) {
+        function(session, args, next) {
             session.send('choose_category');
             next();
         },
         // Show Categories
         CarouselPagination.create(products.getCategories, products.getCategory, categoryMapping, carouselOptions),
         // Category selected
-        function (session, args, next) {
+        function(session, args, next) {
             var category = args.selected;
             session.send('choose_bouquet_from_category', category.name);
             session.dialogData.category = category;
-            session.message.text = null;            // remove message so next step does not take it as input
+            session.message.text = null; // remove message so next step does not take it as input
             next();
         },
         // Show Products
-        function (session, args, next) {
+        function(session, args, next) {
             var categoryName = session.dialogData.category.name;
             CarouselPagination.create(
                 (pageNumber, pageSize) => products.getProducts(categoryName, pageNumber, pageSize),
@@ -44,7 +44,7 @@ lib.dialog('/',
             )(session, args, next);
         },
         // Product selected
-        function (session, args, next) {
+        function(session, args, next) {
             // this is last step, calling next with args will end in session.endDialogWithResult(args)
             next({ selection: args.selected });
         }
@@ -61,13 +61,13 @@ function categoryMapping(category) {
 function productMapping(product) {
     return {
         title: product.name,
-        subtitle: '$ ' + product.price.toFixed(2),
+        subtitle: 'Rs. ' + product.price.toFixed(2),
         imageUrl: product.imageUrl,
         buttonLabel: 'choose_this'
     };
 }
 
 // Export createLibrary() function
-module.exports.createLibrary = function () {
+module.exports.createLibrary = function() {
     return lib.clone();
 };

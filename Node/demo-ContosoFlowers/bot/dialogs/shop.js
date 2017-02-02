@@ -3,40 +3,39 @@ var builder = require('botbuilder');
 
 const lib = new builder.Library('shop');
 lib.dialog('/', [
-    function (session) {
+    function(session) {
         // Ask for delivery address using 'address' library
-        session.beginDialog('address:/',
-            {
-                promptMessage: session.gettext('provide_delivery_address', session.message.user.name || session.gettext('default_user_name'))
-            });
+        session.beginDialog('address:/', {
+            promptMessage: session.gettext('provide_delivery_address', session.message.user.name || session.gettext('default_user_name'))
+        });
     },
-    function (session, args) {
+    function(session, args) {
         // Retrieve address, continue to shop
         session.dialogData.recipientAddress = args.address;
         session.beginDialog('product-selection:/');
     },
-    function (session, args) {
+    function(session, args) {
         // Retrieve selection, continue to delivery date
         session.dialogData.selection = args.selection;
         session.beginDialog('delivery:date');
     },
-    function (session, args) {
+    function(session, args) {
         // Retrieve deliveryDate, continue to details
         session.dialogData.deliveryDate = args.deliveryDate;
-        session.send('confirm_choice', session.dialogData.selection.name, session.dialogData.deliveryDate.toLocaleDateString());
+        session.send('confirm_choice', session.dialogData.selection.name, 'blah');
         session.beginDialog('details:/');
     },
-    function (session, args) {
+    function(session, args) {
         // Retrieve details, continue to billing address
         session.dialogData.details = args.details;
         session.beginDialog('address:billing');
     },
-    function (session, args, next) {
+    function(session, args, next) {
         // Retrieve billing address
         session.dialogData.billingAddress = args.billingAddress;
         next();
     },
-    function (session, args) {
+    function(session, args) {
         // Continue to checkout
         var order = {
             selection: session.dialogData.selection,
@@ -54,6 +53,6 @@ lib.dialog('/', [
 ]);
 
 // Export createLibrary() function
-module.exports.createLibrary = function () {
+module.exports.createLibrary = function() {
     return lib.clone();
 };
