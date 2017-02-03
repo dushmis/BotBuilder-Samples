@@ -1,5 +1,5 @@
 {
     "default_user_name": "User",
     "provide_delivery_address": "%s, please enter the delivery address. Include apartment # if needed.",
-    "confirm_choice": "Great choice \"%s\"! Delivery on %s"
+    "confirm_choice": "Great choice \"%s\"!"
 }

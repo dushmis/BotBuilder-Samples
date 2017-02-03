@@ -12,7 +12,7 @@ const StartOver = 'start_over';
 const KeepGoing = 'continue';
 const Help = 'help';
 lib.dialog('/', [
-    function (session, args, next) {
+    function(session, args, next) {
         args = args || {};
         var order = args.order;
 
@@ -46,19 +46,21 @@ lib.dialog('/', [
                 .addAttachment(card));
         });
     },
-    function (session, args) {
+    function(session, args) {
         builder.Prompts.choice(session, 'select_how_to_continue', [
-            session.gettext(StartOver), 
+            session.gettext(StartOver),
             session.gettext(KeepGoing),
             session.gettext(Help)
         ]);
     },
-    function (session, args) {
+    function(session, args) {
         switch (args.response.entity) {
             case KeepGoing:
-                return session.reset();
+                // return session.reset();
+                return session.beginDialog('/');
             case StartOver:
-                return session.reset('/');
+                // return session.reset('/');
+                return session.beginDialog('/');
             case Help:
                 return session.beginDialog('help:/');
         }
@@ -66,7 +68,7 @@ lib.dialog('/', [
 ]);
 
 // Checkout completed (initiated from web application. See /checkout.js in the root folder)
-lib.dialog('completed', function (session, args, next) {
+lib.dialog('completed', function(session, args, next) {
     args = args || {};
     var orderId = args.orderId;
 
@@ -92,7 +94,7 @@ lib.dialog('completed', function (session, args, next) {
             ])
             .items([
                 builder.ReceiptItem.create(session, order.selection.price, order.selection.name)
-                    .image(builder.CardImage.create(session, order.selection.imageUrl))
+                .image(builder.CardImage.create(session, order.selection.imageUrl))
             ])
             .total(order.selection.price)
             .buttons([
@@ -115,6 +117,6 @@ function offuscateNumber(cardNumber) {
 }
 
 // Export createLibrary() function
-module.exports.createLibrary = function () {
+module.exports.createLibrary = function() {
     return lib.clone();
 };
