@@ -47,11 +47,12 @@ lib.dialog('/', [
         });
     },
     function(session, args) {
-        builder.Prompts.choice(session, 'select_how_to_continue', [
-            session.gettext(StartOver),
-            session.gettext(KeepGoing),
-            session.gettext(Help)
-        ]);
+        return session.beginDialog('/');
+        // builder.Prompts.choice(session, 'select_how_to_continue', [
+        //     session.gettext(StartOver),
+        //     session.gettext(KeepGoing),
+        //     session.gettext(Help)
+        // ]);
     },
     function(session, args) {
         switch (args.response.entity) {
