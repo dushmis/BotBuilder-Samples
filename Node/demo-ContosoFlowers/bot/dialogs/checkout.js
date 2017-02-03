@@ -47,7 +47,7 @@ lib.dialog('/', [
         });
     },
     function(session, args) {
-        return session.beginDialog('/');
+        return session.beginDialog('shop:/');
         // builder.Prompts.choice(session, 'select_how_to_continue', [
         //     session.gettext(StartOver),
         //     session.gettext(KeepGoing),
