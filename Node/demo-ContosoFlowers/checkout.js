@@ -13,11 +13,19 @@ router.get('/', function(req, res, next) {
     var address = botUtils.deserializeAddress(req.query.address);
     console.log('user address is', address);
 
+<<<<<<< HEAD
     orderService.retrieveOrder(orderId).then((order) => {
         // Check order exists
         if (!order) {
             throw new Error('Order ID not found');
         }
+=======
+  orderService.retrieveOrder(orderId).then(function (order) {
+    // Check order exists
+    if (!order) {
+      throw new Error('Order ID not found');
+    }
+>>>>>>> Microsoft/master
 
         // Check order if order is already processed
         if (order.payed) {
@@ -38,9 +46,15 @@ router.get('/', function(req, res, next) {
             order: order
         });
 
+<<<<<<< HEAD
     }).catch((err) => {
         next(err);
     });
+=======
+  }).catch(function (err) {
+    next(err);
+  });
+>>>>>>> Microsoft/master
 
 });
 
@@ -57,8 +71,13 @@ router.post('/', function(req, res, next) {
         creditcardHolder: req.body.fullname
     };
 
+<<<<<<< HEAD
     // Complete order
     orderService.confirmOrder(orderId, paymentDetails).then((processedOrder) => {
+=======
+  // Complete order
+  orderService.confirmOrder(orderId, paymentDetails).then(function (processedOrder) {
+>>>>>>> Microsoft/master
 
         // Dispatch completion dialog
         bot.beginDialog(address, 'checkout:completed', { orderId: orderId });
@@ -69,9 +88,15 @@ router.post('/', function(req, res, next) {
             order: processedOrder
         });
 
+<<<<<<< HEAD
     }).catch((err) => {
         next(err);
     });
+=======
+  }).catch(function (err) {
+    next(err);
+  });
+>>>>>>> Microsoft/master
 });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var Promise = require('bluebird');
 
+<<<<<<< HEAD
 const allCategories = _.times(5)
     .map((i) => ({
         name: 'Plan Type ' + (i + 1),
@@ -15,6 +16,26 @@ const allProducts = _.times(17)
     }));
 
 const productsService = {
+=======
+var allCategories = _.times(5)
+    .map(function (i) {
+        return {
+            name: 'Flower ' + (i + 1),
+            imageUrl: 'https://placeholdit.imgix.net/~text?txtsize=48&txt=Flower%20' + (i + 1) + '&w=640&h=330'
+        };
+    });
+
+var allProducts = _.times(17)
+    .map(function (i) {
+        return {
+            name: 'Bouquet ' + (i + 1) + '\u2122',
+            imageUrl: 'https://placeholdit.imgix.net/~text?txtsize=48&txt=Bouquet%20' + (i + 1) + '&w=640&h=330',
+            price: Math.floor(Math.random() * 100) + 10 + .99
+        };
+    });
+
+var productsService = {
+>>>>>>> Microsoft/master
     // Categories
     getCategories: function(pageNumber, pageSize) {
         return pageItems(pageNumber, pageSize, allCategories);
